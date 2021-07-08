@@ -11,7 +11,7 @@ namespace WpfScheduler
     {
         private List<string> currentDayMeetings;
         private ScheduleAppointmentCollection events;
-        private List<Brush> colorCollection;
+        private List<Brush> ColorCollection;
         internal List<string> nameCollection;
         private ObservableCollection<object> employees;
         public SchedulerViewModel()
@@ -19,8 +19,8 @@ namespace WpfScheduler
             this.events = new ScheduleAppointmentCollection();
             this.employees = new ObservableCollection<object>();
             this.InitializeDataForBookings();
-            this.InitializeResources();
-            this.BookingAppointments();
+            this.CreateResources();
+            this.CreateResourceAppointments();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         public ScheduleAppointmentCollection Events
@@ -47,7 +47,7 @@ namespace WpfScheduler
                 this.RaiseOnPropertyChanged("Employees");
             }
         }
-        private void InitializeResources()
+        private void CreateResources()
         {
             Random random = new Random();
             for (int i = 0; i < 9; i++)
@@ -55,13 +55,13 @@ namespace WpfScheduler
                 Employees.Add(new Employee()
                 {
                     Name = nameCollection[i],
-                    BackgroundBrush = this.colorCollection[random.Next(8)],
+                    BackgroundBrush = this.ColorCollection[random.Next(8)],
                     ID = "560" + i.ToString(),
                     ImageSource = "People_Circle" + i.ToString() + ".png"
                 });
             }
         }
-        private void BookingAppointments()
+        private void CreateResourceAppointments()
         {
             Random random = new Random();
             DateTime date;
@@ -112,18 +112,17 @@ namespace WpfScheduler
             this.nameCollection.Add("Danial Addison");
 
             this.nameCollection.Add("Brooklyn");
-            this.colorCollection = new List<Brush>();
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF339933")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00ABA9")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE671B8")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF1BA1E2")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD80073")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA2C139")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFA2C139")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFD80073")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF339933")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE671B8")));
-            this.colorCollection.Add(new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF00ABA9")));
+
+            this.ColorCollection = new List<Brush>();
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 133, 81, 242)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 140, 245, 219)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 83, 99, 250)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 255, 222, 133)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 45, 153, 255)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 253, 183, 165)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 198, 237, 115)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 253, 185, 222)));
+            this.ColorCollection.Add(new SolidColorBrush(Color.FromArgb(255, 83, 99, 250)));
         }
         private void RaiseOnPropertyChanged(string propertyName)
         {
